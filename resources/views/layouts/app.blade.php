@@ -25,10 +25,9 @@
         }
     </style>
 
-    <!-- AlpineJS -->
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <!-- Font Awesome -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+    
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 <body class="bg-white font-family-karla">
 
@@ -82,11 +81,15 @@
                 <a href="/" class="hover:bg-gray-400 rounded py-2 px-4 mx-2 {{(request()->is('/') ? 'bg-blue-600 text-white' : '')}}">HOME</a>
                 @foreach($categories as $category)
                     <a href="{{route('by-category', $category)}}" class="text-semibold block py-2 px-3 rounded {{(request('category') && request('category')->slug === $category->slug) ? 'bg-blue-600 text-white' : ''}}">
-                        {{$category->title}} ({{$category->total}})
+                        {{$category->title}}
                     </a>
                 @endforeach
             
                 <a href="{{route('about-us')}}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2 {{(request()->is('about-us') ? 'bg-blue-600 text-white' : '')}}">ABOUT US</a>
+
+
+                <a href="{{route('login')}}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">Login</a>
+                <a href="{{route('register')}}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">Register</a>
             </div>
         </div>
     </nav>
