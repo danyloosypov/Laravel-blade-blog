@@ -79,14 +79,14 @@
         </div>
         <div :class="open ? 'block': 'hidden'" class="w-full flex-grow sm:flex sm:items-center sm:w-auto">
             <div class="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
-                <a href="/" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">HOME</a>
+                <a href="/" class="hover:bg-gray-400 rounded py-2 px-4 mx-2 {{(request()->is('/') ? 'bg-blue-600 text-white' : '')}}">HOME</a>
                 @foreach($categories as $category)
                     <a href="{{route('by-category', $category)}}" class="text-semibold block py-2 px-3 rounded {{(request('category') && request('category')->slug === $category->slug) ? 'bg-blue-600 text-white' : ''}}">
                         {{$category->title}} ({{$category->total}})
                     </a>
                 @endforeach
             
-                <a href="{{route('about-us')}}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">ABOUT US</a>
+                <a href="{{route('about-us')}}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2 {{(request()->is('about-us') ? 'bg-blue-600 text-white' : '')}}">ABOUT US</a>
             </div>
         </div>
     </nav>
