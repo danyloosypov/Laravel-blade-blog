@@ -18,10 +18,12 @@
                 <p href="#" class="text-sm pb-8">
                     By <a href="#" class="font-semibold hover:text-gray-800">{{$post->user->name}}</a>, Published on {{$post->published_at}}
                 </p>
-                
+                <livewire:upvote-downvote :post="$post" />
+                <br>
                 <div>
                     {!! $post->body !!}
                 </div>
+                <br>
             </div>
         </article>
 
