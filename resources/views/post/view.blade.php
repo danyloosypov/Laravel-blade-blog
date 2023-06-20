@@ -16,7 +16,7 @@
                 @endforeach
                 <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4">{{$post->title}}</a>
                 <p href="#" class="text-sm pb-8">
-                    By <a href="#" class="font-semibold hover:text-gray-800">{{$post->user->name}}</a>, Published on {{$post->published_at}}
+                    By <a href="#" class="font-semibold hover:text-gray-800">{{$post->user->name}}</a>, Published on {{$post->published_at}} <span>Views {{$views}}</span>
                 </p>
                 <livewire:upvote-downvote :post="$post" />
                 <br>

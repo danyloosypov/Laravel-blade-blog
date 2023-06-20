@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\PostView;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Spatie\FlareClient\Http\Exceptions\NotFound;
@@ -44,7 +45,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(Post $post, Request $request)
     {
         if(!$post->active || $post->published_at > Carbon::now()) {
             throw new NotFoundHttpException();
@@ -66,7 +67,18 @@ class PostController extends Controller
             ->limit(1)
             ->first();
 
-        return view('post.view', compact('post', 'nextPost', 'previousPost'));
+        $user = $request->user();
+
+        PostView::firstOrCreate([
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+            'post_id' => $post->id,
+            'user_id' => $user?->id
+        ]);
+
+        $views = PostView::where('post_id', '=', $post->id)->count();
+
+        return view('post.view', compact('post', 'nextPost', 'previousPost', 'views'));
     }
 
     public function ByCategory(Category $category) {
